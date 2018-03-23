@@ -100,37 +100,37 @@ namespace ContosoUni.Controllers
 
         }
 
-        ///// <summary>
-        ///// Update Student alongwith Enrollments.
-        ///// </summary>
-        ///// <param name="StudentViewModel"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "StudentId,StudentName,StudentPhone,StudentAddress,specializationIds")] StudentViewModel StudentViewModel)
-        //{
-        //    if (StudentViewModel.specializationIds == null)
-        //    {
-        //        ModelState.AddModelError("Enrollments", "Please select specialization");
-        //    }
+        /// <summary>
+        /// Update Student alongwith Enrollments.
+        /// </summary>
+        /// <param name="StudentViewModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,StudentName,LastName,FirstMidName,SelectedCourses")] StudentViewModel StudentViewModel)
+        {
+            if (StudentViewModel.SelectedCourses == null)
+            {
+                ModelState.AddModelError("SelectedCourses", "Please select Courses");
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        _StudentService.SaveStudent(StudentViewModel);
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        StudentViewModel.Enrollments = _StudentService.GetEnrollmentsAll();
-        //        return View(StudentViewModel);
-        //    }
-        //}
+            if (ModelState.IsValid)
+            {
+                _StudentService.SaveStudent(StudentViewModel);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                StudentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
+                return View(StudentViewModel);
+            }
+        }
 
-        ///// <summary>
-        ///// Delete an Student
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// Delete an Student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult DeleteConfirmed(int id)
         {
