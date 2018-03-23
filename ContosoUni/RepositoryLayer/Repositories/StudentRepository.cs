@@ -77,15 +77,14 @@ namespace RepositoryLayer.Repositories
 
                 else
                 {
-                    //Student objStudent = GetStudentById(Student.StudentId);
-
-
-                    //objStudent.StudentId = Student.StudentId;
-                    //objStudent.StudentName = Student.StudentName;
-                    //objStudent.StudentAddress = Student.StudentAddress;
-                    //objStudent.StudentPhone = Student.StudentPhone;
-                    //objStudent.Enrollments = Student.Enrollments;
-                    //uow.SaveChanges();
+                    Student objStudent = GetStudentById(Student.ID);
+                    objStudent.ID = Student.ID;
+                    //objStudent.EnrollmentDate = DateTime.Now;
+                    
+                    objStudent.FirstMidName = Student.FirstMidName;
+                    objStudent.LastName = Student.LastName;
+                    objStudent.Enrollments = Student.Enrollments;
+                    uow.SaveChanges();
 
                 }
             }

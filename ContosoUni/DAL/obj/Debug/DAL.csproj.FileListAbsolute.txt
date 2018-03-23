@@ -41,3 +41,46 @@ E:\Contoso University\MyCode\ContosoUni\DAL\bin\Debug\Unity.Interception.pdb
 E:\Contoso University\MyCode\ContosoUni\DAL\bin\Debug\Unity.Interception.Configuration.pdb
 E:\Contoso University\MyCode\ContosoUni\DAL\bin\Debug\Unity.RegistrationByConvention.pdb
 E:\Contoso University\MyCode\ContosoUni\DAL\bin\Debug\Unity.ServiceLocation.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\DAL.dll.config
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\DAL.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\DAL.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\CommonServiceLocator.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\EntityFramework.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Helpers.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Mvc.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Razor.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.Deployment.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.Razor.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Abstractions.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Configuration.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Container.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Interception.Configuration.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Interception.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Mvc5.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.RegistrationByConvention.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.ServiceLocation.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\WebActivatorEx.dll
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\CommonServiceLocator.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\EntityFramework.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Helpers.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Mvc.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.Razor.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.Deployment.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\System.Web.WebPages.Razor.xml
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Abstractions.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Configuration.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Container.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Interception.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.Interception.Configuration.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.RegistrationByConvention.pdb
+E:\Contonso_Local\ContosoUni\DAL\bin\Debug\Unity.ServiceLocation.pdb
+E:\Contonso_Local\ContosoUni\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+E:\Contonso_Local\ContosoUni\DAL\obj\Debug\DAL.Migrations.CreateDB.resources
+E:\Contonso_Local\ContosoUni\DAL\obj\Debug\DAL.csproj.GenerateResource.Cache
+E:\Contonso_Local\ContosoUni\DAL\obj\Debug\DAL.dll
+E:\Contonso_Local\ContosoUni\DAL\obj\Debug\DAL.pdb
