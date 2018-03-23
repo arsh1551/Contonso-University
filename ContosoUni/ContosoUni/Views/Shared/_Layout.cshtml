@@ -1,0 +1,62 @@
+﻿@using System.Web.Mvc;
+@using DAL.ViewModels;
+
+   
+   
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Contonso University</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</head>
+<body>
+   
+    <header class="fixed-top navbar-light">
+        <div>
+           <br/>
+            <br/>
+           
+        </div>
+    </header>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#428bca">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Contonso University", "Index", "Student", new { area = "" }, new { @class = "navbar-brand", style = "color: white" })
+            </div>
+            <div class="navbar-collapse collapse">
+                @*<ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Log out", "LogOut", "Account")</li>
+
+                </ul>*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - Contonso University</p>*@
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/bootstrap-multiselect.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

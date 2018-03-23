@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DAL.ViewModels.StudentViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Student Listing</h2>*@
+
+<p>
+    
+    @Ajax.ActionLink("Add Student", "Create", null,new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divEmp", OnSuccess = "AddEmployeeSuccess", OnBegin = "onAddEditEmployee" }, new { @class = "btn btn-primary btn-lg " })
+    <br/>
+    <br/>
+</p> 
+<div id="divEmp">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstMidName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseSummary)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstMidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td class="summary">
+                    @Html.DisplayFor(modelItem => item.CourseSummary)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.StudentId })*@
+                    <a href="javascript:(void0)" onclick="DeleteRecord(this)" data-info=@item.ID id="deleteLink" name="deleteLink" data-toggle="modal" data-target="#deleteModal">Delete </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/IndexStudent.js"></script>
+
+}

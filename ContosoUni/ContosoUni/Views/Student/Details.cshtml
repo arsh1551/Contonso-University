@@ -1,0 +1,43 @@
+﻿@model DataAcessLayer.Models.Associate
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Associate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AssociateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssociateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssociatePhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssociatePhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssociateAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssociateAddress)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssociateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
