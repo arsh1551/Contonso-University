@@ -10,7 +10,7 @@ namespace RepositoryLayer.Interfaces
 {
     public interface IStudentRepo
     {
-        //Student GetStudentById(int StudentId);
+        Student GetStudentById(int StudentId);
         List<Student> GetStudents();
         
         void SaveStudent(Student Student);       

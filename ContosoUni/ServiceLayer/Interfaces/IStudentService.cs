@@ -10,7 +10,7 @@ namespace ServiceLayer.Interfaces
 {
     public interface IStudentService
     {
-        //AssociateViewModel GetAssociateById(int associateId);
+        StudentViewModel GetStudentById(int studentId);
         List<StudentViewModel> GetStudents();
        
         void SaveStudent(StudentViewModel student);

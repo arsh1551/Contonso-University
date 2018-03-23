@@ -71,34 +71,34 @@ namespace ContosoUni.Controllers
             }
         }
 
-        ///// <summary>
-        ///// Edit Student form
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return View("BadRequest");
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            StudentViewModel StudentViewModel = _StudentService.GetStudentById(id.Value);
-        //            CreateSummaryOfIds(StudentViewModel);
-        //            return View(StudentViewModel);
-        //        }
-        //        catch
-        //        {
-        //            throw;
-        //        }
+        /// <summary>
+        /// Edit Student form
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return View("BadRequest");
+            }
+            else
+            {
+                try
+                {
+                    StudentViewModel StudentViewModel = _StudentService.GetStudentById(id.Value);
+                    CreateSummaryOfIds(StudentViewModel);
+                    return View(StudentViewModel);
+                }
+                catch
+                {
+                    throw;
+                }
 
-        //    }
+            }
 
-        //}
+        }
 
         ///// <summary>
         ///// Update Student alongwith Enrollments.
@@ -161,7 +161,7 @@ namespace ContosoUni.Controllers
         }
         public void CreateSummaryOfIds(StudentViewModel StudentViewModel)
         {
-            StudentViewModel.CourseSummary = (StudentViewModel.Enrollments.Count > 0) ? string.Join(",", StudentViewModel.Enrollments.Select(e => e.Course.CourseID).ToList()) : "Not specified";
+            StudentViewModel.CourseSummary = (StudentViewModel.SelectedCourses.Count > 0) ? string.Join(",", StudentViewModel.SelectedCourses.ToList()) : "Not specified";
         }
         #endregion
 

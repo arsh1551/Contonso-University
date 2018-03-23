@@ -68,30 +68,31 @@ namespace ServiceLayer.Services
 
         }
 
-        //public StudentViewModel GetStudentById(int StudentId)
-        //{
+        public StudentViewModel GetStudentById(int studentId)
+        {
 
-        //    Student Student = _StudentRepo.GetStudentById(StudentId);
-        //    if (Student != null)
-        //    {
-        //        StudentViewModel StudentViewModel = new StudentViewModel
-        //        {
-        //            StudentId = Student.StudentId,
-        //            StudentName = Student.StudentName,
-        //            StudentAddress = Student.StudentAddress,
-        //            StudentPhone = Student.StudentPhone,
-        //            specializationIds = Student.Specializations.Select(x => x.SpecializationId).ToList(),
-        //            Specializations = _StudentRepo.GetSpecializaionsAll().Select(s => new SpecializationViewModel { SpecializationId = s.SpecializationId, SpecializationName = s.SpecializationName }).ToList()
+            Student Student = _StudentRepo.GetStudentById(studentId);
+            if (Student != null)
+            {
+                StudentViewModel StudentViewModel = new StudentViewModel
+                {
+                    ID = Student.ID,
+                    FirstMidName = Student.FirstMidName,
+                    LastName = Student.LastName,
 
-        //        };
-        //        return StudentViewModel;
-        //    }
-        //    //else part later
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
+                   
+                    SelectedCourses = Student.Enrollments.Select(x => x.Course.CourseID).ToList(),
+                    AvailableCourses = _StudentRepo.GetEnrollmentsAll().Select(s => new CourseViewModel { CourseID = s.CourseID, Title = s.Title,Credits=s.Credits }).ToList()
+
+                };
+                return StudentViewModel;
+            }
+            //else part later
+            else
+            {
+                return null;
+            }
+        }
 
         public void DeleteStudent(int StudentId)
         {
