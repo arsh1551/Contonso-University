@@ -12,10 +12,11 @@ namespace ServiceLayer.Interfaces
     {
         //AssociateViewModel GetAssociateById(int associateId);
         List<StudentViewModel> GetStudents();
-        //void SaveAssociate(AssociateViewModel associateViewModel);
+       
+        void SaveStudent(StudentViewModel student);
         void DeleteStudent(int studentId);
-        
-        //List<SpecializationViewModel> GetSpecializationsAll();
+
+        List<CourseViewModel> GetEnrollmentsAll();
 
     }
 }

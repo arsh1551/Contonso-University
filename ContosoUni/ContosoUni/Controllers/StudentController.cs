@@ -34,42 +34,42 @@ namespace ContosoUni.Controllers
             return View(listStudentViewModel);
         }
 
-        ///// <summary>
-        /////  Save Student form 
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public ActionResult Create()
-        //{
-        //    StudentViewModel objStudentViewModel = new StudentViewModel();
-        //    objStudentViewModel.Enrollments = _StudentService.GetEnrollmentsAll();
-        //    return View(objStudentViewModel);
-        //}
+        /// <summary>
+        ///  Save Student form 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Create()
+      {
+            StudentViewModel objStudentViewModel = new StudentViewModel();
+            objStudentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
+            return View(objStudentViewModel);
+        }
 
-        ///// <summary>
-        ///// Save new Student.
-        ///// </summary>
-        ///// <param name="StudentViewModel"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "StudentId,StudentName,StudentPhone,StudentAddress,specializationIds")] StudentViewModel StudentViewModel)
-        //{
-        //    if (StudentViewModel.specializationIds == null)
-        //    {
-        //        ModelState.AddModelError("Enrollments", "Please select specialization");
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        _StudentService.SaveStudent(StudentViewModel);
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        StudentViewModel.Enrollments = _StudentService.GetEnrollmentsAll();
-        //        return View(StudentViewModel);
-        //    }
-        //}
+        /// <summary>
+        /// Save new Student.
+        /// </summary>
+        /// <param name="StudentViewModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,StudentName,LastName,FirstMidName,SelectedCourses")] StudentViewModel StudentViewModel)
+        {
+            if (StudentViewModel.SelectedCourses == null)
+            {
+                ModelState.AddModelError("AvailableCourses", "Please select Courses");
+            }
+            if (ModelState.IsValid)
+            {
+                _StudentService.SaveStudent(StudentViewModel);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                StudentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
+                return View(StudentViewModel);
+            }
+        }
 
         ///// <summary>
         ///// Edit Student form

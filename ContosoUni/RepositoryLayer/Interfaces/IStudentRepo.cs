@@ -12,10 +12,11 @@ namespace RepositoryLayer.Interfaces
     {
         //Student GetStudentById(int StudentId);
         List<Student> GetStudents();
-        //void SaveStudent(Student Student);       
+        
+        void SaveStudent(Student Student);       
         void DeleteStudent(int studentId);
-        //List<Enrollment> GetStudentEnrollments(StudentViewModel StudentViewModel);
-        //List<Enrollment> GetEnrollmentsAll();
+        List<Enrollment> GetStudentEnrollments(StudentViewModel StudentViewModel);
+        List<Course> GetEnrollmentsAll();
 
     }
 }

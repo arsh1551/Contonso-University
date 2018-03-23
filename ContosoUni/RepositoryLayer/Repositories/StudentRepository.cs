@@ -64,37 +64,37 @@ namespace RepositoryLayer.Repositories
         }
 
 
-        //public void SaveStudent(Student Student)
-        //{
-        //    try
-        //    {
-        //        if (Student.StudentId == 0)
-        //        {
+        public void SaveStudent(Student Student)
+        {
+            try
+            {
+                if (Student.ID == 0)
+                {
+                    Student.EnrollmentDate = DateTime.Now;                    
+                    uow.Repository<Student>().Add(Student);
+                    uow.SaveChanges();
+                }
 
-        //            uow.Repository<Student>().Add(Student);
-        //            uow.SaveChanges();
-        //        }
-
-        //        else
-        //        {
-        //            Student objStudent = GetStudentById(Student.StudentId);
+                else
+                {
+                    //Student objStudent = GetStudentById(Student.StudentId);
 
 
-        //           // objStudent.StudentId = Student.StudentId;
-        //            objStudent.StudentName = Student.StudentName;
-        //            objStudent.StudentAddress = Student.StudentAddress;
-        //            objStudent.StudentPhone = Student.StudentPhone;
-        //            objStudent.Enrollments = Student.Enrollments;
-        //            uow.SaveChanges();
+                    //objStudent.StudentId = Student.StudentId;
+                    //objStudent.StudentName = Student.StudentName;
+                    //objStudent.StudentAddress = Student.StudentAddress;
+                    //objStudent.StudentPhone = Student.StudentPhone;
+                    //objStudent.Enrollments = Student.Enrollments;
+                    //uow.SaveChanges();
 
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
+                }
+            }
+            catch (Exception e)
+            {
 
-        //    }
+            }
 
-        //}
+        }
 
         public Student GetStudentById(int studentId)
         {
@@ -127,16 +127,27 @@ namespace RepositoryLayer.Repositories
 
         }
 
-        //public List<Enrollment> GetSpecializaions(StudentViewModel StudentViewModel)
-        //{
-        //    List<Enrollment> listEnrollment = schoolContext.Enrollments.Where(speclztn => StudentViewModel.EnrollmentIds.Contains(speclztn.EnrollmentId)).ToList();
-        //    return listEnrollment;
-        //}
+        public List<Enrollment> GetStudentEnrollments(StudentViewModel StudentViewModel)
+        {
+            List<Course> listCourses = schoolContext.Courses.Where(c => StudentViewModel.SelectedCourses.Contains(c.CourseID)).ToList();
+            List<Enrollment> listEnrollments = new List<Enrollment>();
+            foreach (Course course in listCourses)
+            {
+                listEnrollments.Add(new Enrollment
+                {
+                    StudentID = StudentViewModel.ID,
+                    CourseID = course.CourseID,
+                    Course = course
+                });
+                    }
+            return listEnrollments;
 
-        //public List<Enrollment> GetSpecializaionsAll()
-        //{
-        //    return schoolContext.Enrollments.ToList();
-        //}
+        }
+
+        public List<Course> GetEnrollmentsAll()
+        {
+            return schoolContext.Courses.ToList();
+        }
 
     }
 }

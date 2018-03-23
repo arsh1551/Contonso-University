@@ -13,10 +13,10 @@ namespace ServiceLayer.Services
 {
     public class StudentService : IStudentService
     {
-        public IStudentRepo _studentRepo = null;
+        public IStudentRepo _StudentRepo = null;
         public StudentService(IStudentRepo objStudentRepo)
         {
-            _studentRepo = objStudentRepo;
+            _StudentRepo = objStudentRepo;
 
         }
 
@@ -25,7 +25,7 @@ namespace ServiceLayer.Services
 
             try
             {
-                List<StudentViewModel> listStudentViewModel = _studentRepo.GetStudents().Select(a => new StudentViewModel
+                List<StudentViewModel> listStudentViewModel = _StudentRepo.GetStudents().Select(a => new StudentViewModel
                 {
                     ID = a.ID,
                     FirstMidName = a.FirstMidName,
@@ -47,45 +47,44 @@ namespace ServiceLayer.Services
 
         }
 
-        //public void SaveAssociate(AssociateViewModel associateViewModel)
+        public  void SaveStudent(StudentViewModel student)
+        {
+            try
+            {
+                Student objStudent = new Student()
+                {
+
+                    ID = student.ID,
+                    LastName = student.LastName,
+                    FirstMidName = student.FirstMidName,
+                    Enrollments = _StudentRepo.GetStudentEnrollments(student)
+                };
+                _StudentRepo.SaveStudent(objStudent);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        //public StudentViewModel GetStudentById(int StudentId)
         //{
-        //    try
+
+        //    Student Student = _StudentRepo.GetStudentById(StudentId);
+        //    if (Student != null)
         //    {
-        //        Associate objAssociate = new Associate()
+        //        StudentViewModel StudentViewModel = new StudentViewModel
         //        {
-
-        //            AssociateId = associateViewModel.AssociateId,
-        //            AssociateName = associateViewModel.AssociateName,
-        //            AssociateAddress = associateViewModel.AssociateAddress,
-        //            AssociatePhone = associateViewModel.AssociatePhone,
-        //            Specializations = _associateRepo.GetSpecializaions(associateViewModel)
-        //        };
-        //        _associateRepo.SaveAssociate(objAssociate);
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //    }
-
-        //}
-
-        //public AssociateViewModel GetAssociateById(int associateId)
-        //{
-
-        //    Associate associate = _associateRepo.GetAssociateById(associateId);
-        //    if (associate != null)
-        //    {
-        //        AssociateViewModel associateViewModel = new AssociateViewModel
-        //        {
-        //            AssociateId = associate.AssociateId,
-        //            AssociateName = associate.AssociateName,
-        //            AssociateAddress = associate.AssociateAddress,
-        //            AssociatePhone = associate.AssociatePhone,
-        //            specializationIds = associate.Specializations.Select(x => x.SpecializationId).ToList(),
-        //            Specializations = _associateRepo.GetSpecializaionsAll().Select(s => new SpecializationViewModel { SpecializationId = s.SpecializationId, SpecializationName = s.SpecializationName }).ToList()
+        //            StudentId = Student.StudentId,
+        //            StudentName = Student.StudentName,
+        //            StudentAddress = Student.StudentAddress,
+        //            StudentPhone = Student.StudentPhone,
+        //            specializationIds = Student.Specializations.Select(x => x.SpecializationId).ToList(),
+        //            Specializations = _StudentRepo.GetSpecializaionsAll().Select(s => new SpecializationViewModel { SpecializationId = s.SpecializationId, SpecializationName = s.SpecializationName }).ToList()
 
         //        };
-        //        return associateViewModel;
+        //        return StudentViewModel;
         //    }
         //    //else part later
         //    else
@@ -93,13 +92,13 @@ namespace ServiceLayer.Services
         //        return null;
         //    }
         //}
-        
-        public void DeleteStudent(int studentId)
+
+        public void DeleteStudent(int StudentId)
         {
 
             try
             {
-                _studentRepo.DeleteStudent(studentId);
+                _StudentRepo.DeleteStudent(StudentId);
             }
             catch (Exception e)
             {
@@ -108,10 +107,12 @@ namespace ServiceLayer.Services
 
         }
 
-        //public List<SpecializationViewModel> GetSpecializationsAll()
-        //{
-        //    List<SpecializationViewModel> listSpecializations= _associateRepo.GetSpecializaionsAll().Select(s => new SpecializationViewModel { SpecializationId = s.SpecializationId, SpecializationName = s.SpecializationName }).ToList();
-        //    return listSpecializations;
-        //}
+        public List<CourseViewModel> GetEnrollmentsAll()
+        {
+            List<CourseViewModel> listCoursesAll = _StudentRepo.GetEnrollmentsAll().Select(e=>           
+                new CourseViewModel { CourseID = e.CourseID, Title = e.Title, Credits = e.Credits }
+            ).ToList();
+            return listCoursesAll;
+        }
     }
 }

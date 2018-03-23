@@ -178,6 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -189,7 +190,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\CreateAssociate.js" />
+    <Content Include="Scripts\CreateStudent.js" />
     <Content Include="Scripts\CreateList.js" />
     <Content Include="Scripts\EditAssociate.js" />
     <Content Include="Scripts\IndexAssociate.js" />

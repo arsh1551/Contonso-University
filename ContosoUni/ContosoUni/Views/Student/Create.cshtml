@@ -1,4 +1,4 @@
-﻿@model DataAcessLayer.ViewModels.AssociateViewModel
+﻿@model DAL.ViewModels.StudentViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -9,52 +9,52 @@
     @Html.ActionLink("Back to List", "Index")
     <br />
 </div>
-<h2>Add Associate</h2>
+<h2>Add Student</h2>
 
 <div id="divAssociate">
-    @using (Ajax.BeginForm("Create", "Associate", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divAssociate", OnSuccess = "AddEmployeeSuccess", OnBegin = "onAddEditEmployee" }))
+    @using (Ajax.BeginForm("Create", "Student", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divAssociate", OnSuccess = "AddEmployeeSuccess", OnBegin = "onAddEditEmployee" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            @*<h4>Associate</h4>*@
+           
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.AssociateName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.FirstMidName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.AssociateName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AssociateName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.FirstMidName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstMidName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.AssociatePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.AssociatePhone, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.AssociatePhone, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.AssociateAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.AssociateAddress, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.AssociateAddress, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
-                @Html.LabelFor(model => model.Specializations, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.AvailableCourses, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @if (Model.Specializations != null)
+                    @if (Model.AvailableCourses != null)
                     {
-                        @Html.DropDownListFor(m => m.specializationIds, new MultiSelectList(Model.Specializations, "SpecializationId", "SpecializationName"), new { @class = "chzn-select form-control", multiple = "multiple" })
+                        @Html.DropDownListFor(m => m.SelectedCourses, new MultiSelectList(Model.AvailableCourses, "CourseID", "Title"), new { @class = "chzn-select form-control", multiple = "multiple" })
                     }
                     else
                     {
-                        @Html.EditorFor(model => model.Specializations, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.AvailableCourses, new { htmlAttributes = new { @class = "form-control" } })
                     }
-                    @Html.ValidationMessageFor(model => model.Specializations, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.AvailableCourses, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script src="~/Scripts/CreateAssociate.js"></script>
+    <script src="~/Scripts/CreateStudent.js"></script>
 
 }
 <!-- Initialize the plugin: -->
