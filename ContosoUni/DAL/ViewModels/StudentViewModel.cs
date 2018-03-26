@@ -21,16 +21,17 @@ namespace DAL.ViewModels
         [MaxLength(30, ErrorMessage = "Maximum length exceeded")]
         [RegularExpression("[A-Za-z ]*", ErrorMessage = "Invalid first name! ")]
         public string FirstMidName { get; set; }
+        [Display(Name = "Enrolled on")]
         public DateTime EnrollmentDate { get; set; }
 
         //student specific
         public virtual ICollection<EnrollmentViewModel> Enrollments { get; set; }
-
+        [Display(Name = "Courses")]
         public string CourseSummary { get; set; }
 
         //posted course id's from dropdown
         public List<int> SelectedCourses { get; set; }
-
+       
         //All avialble courses in db: bind with dropdown
         public List<CourseViewModel> AvailableCourses { get; set; }
 

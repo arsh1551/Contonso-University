@@ -40,7 +40,7 @@ namespace ContosoUni.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Create()
-      {
+        {
             StudentViewModel objStudentViewModel = new StudentViewModel();
             objStudentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
             return View(objStudentViewModel);
