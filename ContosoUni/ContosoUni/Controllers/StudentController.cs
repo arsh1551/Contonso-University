@@ -107,22 +107,22 @@ namespace ContosoUni.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StudentName,LastName,FirstMidName,SelectedCourses")] StudentViewModel StudentViewModel)
+        public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,SelectedCourses")] StudentViewModel studentViewModel)
         {
-            if (StudentViewModel.SelectedCourses == null)
+            if (studentViewModel.SelectedCourses == null)
             {
                 ModelState.AddModelError("SelectedCourses", "Please select Courses");
             }
 
             if (ModelState.IsValid)
             {
-                _StudentService.SaveStudent(StudentViewModel);
+                _StudentService.SaveStudent(studentViewModel);
                 return RedirectToAction("Index");
             }
             else
             {
-                StudentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
-                return View(StudentViewModel);
+                studentViewModel.AvailableCourses = _StudentService.GetEnrollmentsAll();
+                return View(studentViewModel);
             }
         }
 
