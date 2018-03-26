@@ -51,8 +51,7 @@ namespace RepositoryLayer.Repositories
 
             try
             {
-                // List<Student> userList = uow.Repository<Student>().GetAll().ToList();
-                List<Student> listStudent = schoolContext.Students.Include(a => a.Enrollments).ToList();
+                List<Student> listStudent = uow.Repository<Student>().GetAll().ToList();
                 return listStudent;
             }
             catch
@@ -70,20 +69,42 @@ namespace RepositoryLayer.Repositories
             {
                 if (Student.ID == 0)
                 {
-                    Student.EnrollmentDate = DateTime.Now;                    
+                    Student.EnrollmentDate = DateTime.Now;
                     uow.Repository<Student>().Add(Student);
                     uow.SaveChanges();
                 }
 
                 else
                 {
-                    Student objStudent = GetStudentById(Student.ID);
-                    objStudent.ID = Student.ID;
-                    //objStudent.EnrollmentDate = DateTime.Now;
-                    
-                    objStudent.FirstMidName = Student.FirstMidName;
-                    objStudent.LastName = Student.LastName;
-                    objStudent.Enrollments = Student.Enrollments;
+                    var studentDB = uow.Repository<Student>().AsQuerable().Where(s => s.ID == Student.ID)
+            .Include(s => s.Enrollments)
+            .SingleOrDefault();
+                    studentDB.LastName = Student.LastName;
+                    studentDB.FirstMidName = Student.FirstMidName;
+                    foreach (var enrollment in Student.Enrollments)
+                    {
+                        var studentEnrollmentDB = studentDB.Enrollments
+                            .Where(c => c.CourseID == enrollment.CourseID && c.StudentID == enrollment.StudentID && c.EnrollmentID != 0)
+                            .SingleOrDefault();
+                        if (studentEnrollmentDB != null)
+                        {
+                            //Add according to future requirements.
+                        }
+                        else
+                        {
+                            enrollment.EnrollmentID = 0;
+                            studentDB.EnrollmentDate = DateTime.Now;
+                            studentDB.Enrollments.Add(enrollment);
+                        }
+                    }
+                    foreach (var enrollmentDB in
+                                 studentDB.Enrollments.Where(c => c.EnrollmentID != 0).ToList())
+                    {
+
+                        if (!Student.Enrollments.Any(e => e.CourseID == enrollmentDB.CourseID && e.StudentID == enrollmentDB.StudentID))
+                            uow.Repository<Enrollment>().Delete(enrollmentDB);
+
+                    }
                     uow.SaveChanges();
 
                 }
@@ -94,12 +115,14 @@ namespace RepositoryLayer.Repositories
             }
 
         }
-       
+
         public Student GetStudentById(int studentId)
         {
             try
             {
-                Student Student = schoolContext.Students.Where(a => a.ID == studentId).Include(x => x.Enrollments).FirstOrDefault();
+                Student Student = uow.Repository<Student>().AsQuerable().Where(s => s.ID == studentId)
+            .Include(s => s.Enrollments)
+            .SingleOrDefault();
                 return Student;
             }
             catch
@@ -116,8 +139,8 @@ namespace RepositoryLayer.Repositories
             try
             {
                 Student Student = GetStudentById(studentId);
-                schoolContext.Students.Remove(Student);
-                schoolContext.SaveChanges();
+                uow.Repository<Student>().Delete(Student);
+                uow.SaveChanges();
             }
             catch (Exception e)
             {
@@ -128,7 +151,7 @@ namespace RepositoryLayer.Repositories
 
         public List<Enrollment> GetStudentEnrollments(StudentViewModel StudentViewModel)
         {
-            List<Course> listCourses = schoolContext.Courses.Where(c => StudentViewModel.SelectedCourses.Contains(c.CourseID)).ToList();
+            List<Course> listCourses = uow.Repository<Course>().AsQuerable().Where(c => StudentViewModel.SelectedCourses.Contains(c.CourseID)).ToList();
             List<Enrollment> listEnrollments = new List<Enrollment>();
             foreach (Course course in listCourses)
             {
@@ -138,14 +161,14 @@ namespace RepositoryLayer.Repositories
                     CourseID = course.CourseID,
                     Course = course
                 });
-                    }
+            }
             return listEnrollments;
 
         }
 
         public List<Course> GetEnrollmentsAll()
         {
-            return schoolContext.Courses.ToList();
+            return uow.Repository<Course>().GetAll().ToList();
         }
 
     }
