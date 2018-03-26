@@ -68,6 +68,85 @@ namespace ServiceLayer.Services
 
         }
 
+        public void UpdateStudent(List<int> selectedCourses, StudentViewModel studentViewModel)
+        {
+          StudentViewModel updatedStudentViewModel=  UpdateStudentEnrollments(selectedCourses, studentViewModel);
+
+
+            try
+            {
+                Student objStudent = new Student()
+                {
+
+                    ID = updatedStudentViewModel.ID,
+                    LastName = updatedStudentViewModel.LastName,
+                    FirstMidName = updatedStudentViewModel.FirstMidName,
+                    Enrollments = updatedStudentViewModel.Enrollments.Select(e => new Enrollment { EnrollmentID = e.EnrollmentID, CourseID = e.CourseID, StudentID = e.StudentID,
+                        Course = new Course { CourseID = e.Course.CourseID, Title = e.Course.Title, Credits = e.Course.Credits } }).ToList()
+                    // Enrollments = a.Enrollments
+                };
+                
+                _StudentRepo.SaveStudent(objStudent);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        private StudentViewModel UpdateStudentEnrollments(List<int> selectedCourses, StudentViewModel studentViewModel)
+        {
+            Student student = _StudentRepo.GetStudentById(studentViewModel.ID);
+            List<EnrollmentViewModel> studentExistingEnrollments = student.Enrollments.Select(e => new EnrollmentViewModel
+            {
+                EnrollmentID = e.EnrollmentID,
+                CourseID = e.CourseID,
+                StudentID = e.StudentID,
+                Course = new CourseViewModel { CourseID = e.Course.CourseID, Title = e.Course.Title, Credits = e.Course.Credits }
+            }).ToList();
+            studentViewModel.Enrollments= studentExistingEnrollments;
+
+            if (selectedCourses == null)
+            {
+                studentViewModel.Enrollments = new List<EnrollmentViewModel>();
+                return studentViewModel;
+            }
+            var AvailableCourses = _StudentRepo.GetEnrollmentsAll();
+            var selectedCoursesHS = new HashSet<int>(selectedCourses);
+            var instructorCourses = new HashSet<int>
+                (studentExistingEnrollments.Select(e => e.Course.CourseID));
+            foreach (var course in AvailableCourses)
+            {
+                if (selectedCoursesHS.Contains(course.CourseID))
+                {
+                    if (!instructorCourses.Contains(course.CourseID))
+                    {
+                        EnrollmentViewModel newEnrollment = new EnrollmentViewModel();
+                        newEnrollment.Course = new CourseViewModel { CourseID = course.CourseID, Title = course.Title, Credits = course.Credits };
+                        newEnrollment.CourseID = course.CourseID;
+                        newEnrollment.StudentID = student.ID;
+                        
+
+
+                        studentViewModel.Enrollments.Add(newEnrollment);
+                    }
+                }
+                else
+                {
+
+                    if (instructorCourses.Contains(course.CourseID))
+                    {
+                        EnrollmentViewModel deleteEnrollmentViewModel = studentViewModel.Enrollments.Where(e => e.Course.CourseID == course.CourseID).FirstOrDefault();
+                        studentViewModel.Enrollments.Remove(deleteEnrollmentViewModel);
+
+                    }
+                }
+                
+            }
+            return studentViewModel;
+        }
+
         public StudentViewModel GetStudentById(int studentId)
         {
 

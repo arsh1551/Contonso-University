@@ -17,6 +17,7 @@ namespace ServiceLayer.Interfaces
         void DeleteStudent(int studentId);
 
         List<CourseViewModel> GetEnrollmentsAll();
+        void UpdateStudent(List<int> selectedCourses, StudentViewModel studentViewModel);
 
     }
 }

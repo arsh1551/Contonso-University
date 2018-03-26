@@ -18,5 +18,6 @@ namespace RepositoryLayer.Interfaces
         List<Enrollment> GetStudentEnrollments(StudentViewModel StudentViewModel);
         List<Course> GetEnrollmentsAll();
 
+
     }
 }
